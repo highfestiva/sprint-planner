@@ -2,23 +2,27 @@
 <html>
 <head>
   <title>Plan {{name}}</title>
-  <link rel="stylesheet" href="/static/plan.css" type="text/css">
+  <link rel="stylesheet" href="/static/plan.css" type="text/css"></link>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="/static/mouse_mark.js"></script>
 </head>
 <body>
-  <table>
+  <table id="ppl_dates_table">
     <tr>
       <th></th>
       {% for date in data.index %}
-        <th>{{date}}</th>
+        <th class="{% if data.loc[date,'_free'] %}free{% endif %}">{{data.loc[date,'_date_names']|safe}}</th>
       {% endfor %}
     </tr>
     {% for person in data.columns %}
-      <tr>
-        <th>{{person}}</th>
-        {% for date in data.index %}
-          <td></td>
-        {% endfor %}
-      </tr>
+      {% if not person.startswith('_') %}
+        <tr>
+          <th>{{person}}</th>
+          {% for date in data.index %}
+            <td class="{% if data.loc[date,person]>0 %}working{% endif %} {% if data.loc[date,'_free'] %}free{% endif %}"></td>
+          {% endfor %}
+        </tr>
+      {% endif %}
     {% endfor %}
   </table>
 </body>

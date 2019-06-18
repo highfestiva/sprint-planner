@@ -5,3 +5,15 @@ body {
 th {
     font-weight: normal;
 }
+#ppl_dates_table {
+	user-select: none;
+}
+td.working {
+	background-color: #dfd;
+}
+td.free {
+	background-color: #fdd;
+}
+td.free.working {
+	background-color: #ffd;
+}
