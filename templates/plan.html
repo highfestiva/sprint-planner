@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Plan {{name}}</title>
+  <link rel="stylesheet" href="/static/plan.css" type="text/css">
+</head>
+<body>
+  <table>
+    <tr>
+      <th></th>
+      {% for date in data.index %}
+        <th>{{date}}</th>
+      {% endfor %}
+    </tr>
+    {% for person in data.columns %}
+      <tr>
+        <th>{{person}}</th>
+        {% for date in data.index %}
+          <td></td>
+        {% endfor %}
+      </tr>
+    {% endfor %}
+  </table>
+</body>
+<html>
