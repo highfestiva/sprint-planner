@@ -7,11 +7,12 @@
   <script src="/static/mouse_mark.js"></script>
 </head>
 <body>
-  <table id="ppl_dates_table">
+{% for name,data in tables %}
+  <table class="{{name}}_table">
     <tr>
       <th></th>
       {% for date in data.index %}
-        <th class="col {% if data.loc[date,'_free'] %}free{% endif %}">{{data.loc[date,'_date_names']|safe}}</th>
+        <th class="col {% if data.loc[date,'_free'] %}free{% endif %}">{{data.loc[date,'_date_names']|replace('\n','<br/>')|safe}}</th>
       {% endfor %}
     </tr>
     {% for person in data.columns %}
@@ -19,11 +20,12 @@
         <tr>
           <th>{{person}}</th>
           {% for date in data.index %}
-            <td class="{% if data.loc[date,person]>0 %}working{% endif %} {% if data.loc[date,'_free'] %}free{% endif %}"></td>
+            <td class="{% if data.loc[date,person]>0 %}working{% endif %} {% if data.loc[date,'_free'] %}free{% endif %}">{% if 'sprint_' in name %}<input type="checkbox"/>{% endif %}</td>
           {% endfor %}
         </tr>
       {% endif %}
     {% endfor %}
   </table>
+{% endfor %}
 </body>
 <html>

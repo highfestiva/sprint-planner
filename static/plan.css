@@ -5,18 +5,27 @@ body {
 th {
     font-weight: normal;
 }
-#ppl_dates_table {
+table {
 	user-select: none;
 }
-td.working {
+table th:nth-child(1) {
+	min-width: 50px;
+	max-width: 50px;
+	width: 50px;
+}
+.ppl_dates_table td.working {
 	background-color: #ddffdd;
 }
 th.free {
     background-color: #fee;
 }
-td.free {
+.ppl_dates_table td.free {
 	background-color: #ffc0c0;
 }
-td.free.working {
+.ppl_dates_table td.free.working {
 	background-color: #e8ffc0;
+}
+input[type="checkbox"] {
+    margin: 0;
+    padding: 0;
 }

@@ -2,7 +2,7 @@ $(function () {
   var isMouseDown = false,
       isFree = false,
       isWorking;
-  $("#ppl_dates_table td")
+  $(".ppl_dates_table td")
     .mousedown(function () {
       isMouseDown = true;
       $(this).toggleClass("working");
@@ -24,11 +24,11 @@ $(function () {
     });
 
   // click date column
-  $("#ppl_dates_table th.col")
+  $("th.col")
     .mousedown(function () {
+      var setFree = !$(this).hasClass("free");
       var index = $(this).index() + 1;
-      $(this).toggleClass("free");
-      var setFree = $(this).hasClass("free");
-      $("#ppl_dates_table td:nth-child("+index+")").toggleClass("free", setFree);
+      $("th:nth-child("+index+")").toggleClass("free", setFree);
+      $("td:nth-child("+index+")").toggleClass("free", setFree);
     });
 });

@@ -17,19 +17,28 @@ def favicon():
 
 @app.route('/plan/<name>')
 def plan(name):
-    real_dates = dates = pd.date_range(start='2019-06-17', end='2019-07-30')
-    dates = [fixdate(d) for d in dates]
+    dates = dates = pd.date_range(start='2019-06-17', end='2019-07-30')
+    persons = 'JB J RZ RF IB AA GW'.split()
+    table1 = _create_table(dates, persons)
+    persons = 'ML MO SF HSK'.split()
+    table2 = _create_table(dates, persons)
+    persons = ['Sprint\nstart']
+    table3 = _create_table(dates, persons)
+    return render_template('plan.html', name=name, tables=[('ppl_dates', table1), ('ppl_dates', table2), ('sprint_start_dates', table3)])
+
+
+def _create_table(real_dates, persons):
+    dates = [fixdate(d) for d in real_dates]
     date_names = []
     prev_month = ''
     for date in dates:
         month,day = date.split('-')
         if month == prev_month:
-            date_names += ['<br>'+day]
+            date_names += ['\n'+day]
         else:
-            date_names += [month+'<br>'+day]
+            date_names += [month+'\n'+day]
             prev_month = month
     meta = '_date_names _free'.split()
-    persons = 'JB J RZ RF IB AA GW ML MO SF HSK'.split()
     data = pd.DataFrame(index=dates, columns=meta+persons)
     data.loc[:, '_date_names'] = date_names
     data.loc[:, '_free'] = [rd.weekday()>=5 for rd in real_dates]
@@ -38,7 +47,7 @@ def plan(name):
         ds = random.sample(dates, 8)
         for d in ds:
             data.loc[d,p] = 0.0
-    return render_template('plan.html', name=name, data=data)
+    return data
 
 
 def fixdate(d):
