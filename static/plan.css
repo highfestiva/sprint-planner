@@ -9,11 +9,14 @@ th {
 	user-select: none;
 }
 td.working {
-	background-color: #dfd;
+	background-color: #ddffdd;
+}
+th.free {
+    background-color: #fee;
 }
 td.free {
-	background-color: #fdd;
+	background-color: #ffc0c0;
 }
 td.free.working {
-	background-color: #ffd;
+	background-color: #e8ffc0;
 }

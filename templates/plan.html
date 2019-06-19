@@ -11,7 +11,7 @@
     <tr>
       <th></th>
       {% for date in data.index %}
-        <th class="{% if data.loc[date,'_free'] %}free{% endif %}">{{data.loc[date,'_date_names']|safe}}</th>
+        <th class="col {% if data.loc[date,'_free'] %}free{% endif %}">{{data.loc[date,'_date_names']|safe}}</th>
       {% endfor %}
     </tr>
     {% for person in data.columns %}
